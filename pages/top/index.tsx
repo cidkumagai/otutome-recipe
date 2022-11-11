@@ -28,7 +28,7 @@ const Top: NextPage = () => {
         setOffset(page_number * perPage);
         pagenateRef!.current!.scrollIntoView();
     };
-    const onClick = (id: number) => {
+    const useOnClick = (id: number) => {
         useUpdateByFoodId(id).then(() => {
             window.location.href = `/recipe?foodId=${id}`;
         });
@@ -315,7 +315,7 @@ const Top: NextPage = () => {
                                                 transition='all 0.5s'
                                                 pointerEvents={'auto'}
                                                 onClick={() => {
-                                                    onClick(item.id);
+                                                    useOnClick(item.id);
                                                 }}
                                                 _hover={{
                                                     transition: 'all 0.5s',
