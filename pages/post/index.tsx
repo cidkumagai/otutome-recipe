@@ -19,7 +19,7 @@ import {
     useDisclosure,
 } from '@chakra-ui/react';
 import { NextPage } from 'next';
-import { ChangeEvent, createRef, RefObject, use, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, createRef, RefObject, useRef, useState } from 'react';
 
 import thumbnail from '../images/add_pic.png';
 import { Header } from '../../components/Header';

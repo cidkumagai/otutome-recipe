@@ -1,5 +1,3 @@
-import type { Prisma } from '@prisma/client';
-import { ApolloError } from 'apollo-server-micro';
 import { objectType, extendType, nonNull, intArg, list, stringArg } from 'nexus';
 import { Information, InformationSchema } from './Information';
 import { Ingredient, IngredientSchema } from './Ingredient';

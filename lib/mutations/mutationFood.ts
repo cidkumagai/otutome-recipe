@@ -5,13 +5,6 @@ export interface AddFoodArray {
     getFood: FoodsSchema;
 }
 
-// $recipe: [String!];
-// $material: [String!];
-// $amount: [String!];
-
-// recipe: $recipe;
-// material: $material;
-// amount: $amount;
 export function AddFood() {
     const addFoodMutation = gql`
         mutation (
