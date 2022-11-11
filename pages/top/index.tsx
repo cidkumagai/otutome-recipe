@@ -13,13 +13,13 @@ import rogoPic from '../images/cscpロゴ.png';
 import { SectionTitle } from '../../components/SectionTitle';
 import { GetAllFoods } from '../../lib/queries/getAllFoods';
 import { Fragment, useRef, useState } from 'react';
-import { pvUpdateMutation } from '../../lib/mutations/mutationPv';
+import { usePvUpdateMutation } from '../../lib/mutations/mutationPv';
 
 export { Top as default };
 
 const Top: NextPage = () => {
     const { data, loading, error } = GetAllFoods();
-    const { useUpdateByFoodId } = pvUpdateMutation();
+    const { useUpdateByFoodId } = usePvUpdateMutation();
     const [offset, setOffset] = useState(0);
     const perPage = 6;
     const pagenateRef = useRef<HTMLDivElement>(null);
@@ -27,6 +27,11 @@ const Top: NextPage = () => {
         let page_number = data['selected'];
         setOffset(page_number * perPage);
         pagenateRef!.current!.scrollIntoView();
+    };
+    const onClick = (id: number) => {
+        useUpdateByFoodId(id).then(() => {
+            window.location.href = `/recipe?foodId=${id}`;
+        });
     };
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error.message}</p>;
@@ -310,9 +315,7 @@ const Top: NextPage = () => {
                                                 transition='all 0.5s'
                                                 pointerEvents={'auto'}
                                                 onClick={() => {
-                                                    useUpdateByFoodId(item.id).then(() => {
-                                                        window.location.href = `/recipe?foodId=${item.id}`;
-                                                    });
+                                                    onClick(item.id);
                                                 }}
                                                 _hover={{
                                                     transition: 'all 0.5s',
@@ -343,18 +346,18 @@ const Top: NextPage = () => {
                     nextClassName={'pagination_next'}
                     disabledClassName={styles.pagination_disabled}
                 />
-            <Link href={'/post'}>
-                <Text
-                    fontSize={'20px'}
-                    as={'u'}
-                    color={'#f49f2b'}
-                    textAlign={'center'}
-                    display={'flex'}
-                    justifyContent={'center'}
-                >
-                    レシピ投稿はこちら
-                </Text>
-            </Link>
+                <Link href={'/post'}>
+                    <Text
+                        fontSize={'20px'}
+                        as={'u'}
+                        color={'#f49f2b'}
+                        textAlign={'center'}
+                        display={'flex'}
+                        justifyContent={'center'}
+                    >
+                        レシピ投稿はこちら
+                    </Text>
+                </Link>
             </Box>
             <Box backgroundColor={'#ffffff'}>
                 <Box width={'100%'} height={'70px'} display={'flex'} alignItems={'center'}>

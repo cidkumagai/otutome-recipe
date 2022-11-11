@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 
 import { Box, Flex, Img, Text } from '@chakra-ui/react';
 
-import { pickUpFoodId } from './[id]';
+import { usePickUpFoodId } from './[id]';
 import { GetFood } from '../../lib/queries/getFood';
 import { HomeButton } from '../../components/HomeButton';
 import { Header } from '../../components/Header';
@@ -10,7 +10,7 @@ import { Header } from '../../components/Header';
 export { Recipe as default };
 
 const Recipe: NextPage = () => {
-    const { foodId } = pickUpFoodId();
+    const { foodId } = usePickUpFoodId();
     const { data, loading, error } = GetFood(Number(foodId));
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error.message}</p>;
@@ -26,7 +26,7 @@ const Recipe: NextPage = () => {
                 display={{ base: 'block', lg: 'flex' }}
             >
                 <Img
-                    src={data.getFood.photo}
+                    src={data ? data.getFood.photo : undefined}
                     alt={'料理完成写真'}
                     maxWidth={{ base: '90%', lg: '50%' }}
                     maxHeight={'50%'}

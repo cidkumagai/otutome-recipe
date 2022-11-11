@@ -1,6 +1,6 @@
 import { gql, useMutation } from "@apollo/client";
 
-export function pvUpdateMutation() {
+export function usePvUpdateMutation() {
     const getPvQuery = gql`
         mutation ($foodId: Int!) {
             pvIncrement(foodId: $foodId) {
