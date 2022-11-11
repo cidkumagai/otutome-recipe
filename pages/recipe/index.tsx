@@ -26,7 +26,7 @@ const Recipe: NextPage = () => {
                 display={{ base: 'block', lg: 'flex' }}
             >
                 <Img
-                    src={data ? data.getFood.photo : undefined}
+                    src={data?.getFood.photo}
                     alt={'料理完成写真'}
                     maxWidth={{ base: '90%', lg: '50%' }}
                     maxHeight={'50%'}
@@ -59,10 +59,10 @@ const Recipe: NextPage = () => {
                             backgroundColor: '#f49f2b',
                         }}
                     >
-                        {data.getFood.name}
+                        {data?.getFood.name}
                     </Text>
                     <Box>
-                        {data.getFood.ingredient.map((item, index) => {
+                        {data?.getFood.ingredient.map((item, index) => {
                             return (
                                 <Flex
                                     key={index}
@@ -138,7 +138,7 @@ const Recipe: NextPage = () => {
                 margin={'0 auto'}
                 justifyContent={{ base: 'center', lg: 'unset' }}
             >
-                {data.getFood.recipe.map((item, index) => {
+                {data?.getFood.recipe.map((item, index) => {
                     return (
                         <Box
                             key={index}
