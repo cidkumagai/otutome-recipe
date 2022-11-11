@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["interactiveTransactions"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Food {
+  id          Int          @id @default(autoincrement())
+  name        String       @db.VarChar(50)
+  photo       String
+  comment     String       @db.VarChar(100)
+  information Information?
+  recipe      Recipe[]
+  ingredient  Ingredient[]
+}
+
+model Information {
+  id         Int      @id @default(autoincrement())
+  pv         Int      @default(0)
+  created_at DateTime @default(now())
+  foodId     Int      @unique
+  food       Food     @relation(fields: [foodId], references: [id])
+}
+
+model Recipe {
+  id        Int    @id @default(autoincrement())
+  rank      Int
+  procedule String @db.VarChar(100)
+  photo     String @default("")
+  foodId    Int
+  food      Food   @relation(fields: [foodId], references: [id])
+}
+
+model Ingredient {
+  id       Int    @id @default(autoincrement())
+  material String @db.VarChar(30)
+  amount   String @db.VarChar(30)
+  foodId   Int
+  food     Food   @relation(fields: [foodId], references: [id])
+}

@@ -1,0 +1,33 @@
+.pagination {
+    width: 90%;
+    margin: 0 auto 30px auto;
+    display: flex;
+    justify-content: center;
+    & > li {
+        margin: 0 12px;
+        list-style: none;
+        & > a {
+            position: relative;
+            font-size: 15px;
+            width: 24px;
+            height: 24px;
+            z-index: 100;
+            cursor: pointer;
+            padding: 5px 10px;
+            color: #7a7b97;
+        }
+
+        &.active > a{
+            color: #ffffff;
+            border: 1px solid #40414d;
+            background-color: #40414d;
+            border-radius: 5px;
+        }
+    }
+
+    &_disabled {
+        pointer-events: none;
+        color: #dcdef3;
+        opacity: 0.3;
+    }
+}
