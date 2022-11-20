@@ -2,16 +2,18 @@ import { NextPage } from 'next';
 
 import { Box, Flex, Img, Text } from '@chakra-ui/react';
 
-import { usePickUpFoodId } from './[id]';
 import { GetFood } from '../../lib/queries/getFood';
 import { HomeButton } from '../../components/HomeButton';
 import { Header } from '../../components/Header';
+import { useRouter } from 'next/router';
 
 export { Recipe as default };
 
 const Recipe: NextPage = () => {
-    const { foodId } = usePickUpFoodId();
+    const router = useRouter();
+    const { foodId } = router.query;
     const { data, loading, error } = GetFood(Number(foodId));
+    console.log(data)
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error.message}</p>;
     return (
